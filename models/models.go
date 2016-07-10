@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/astaxie/beego/orm"
-	_ "github.com/mattn/mysql"
-	"github.com/Unknwon/com"
+	_ "github.com/go-sql-driver/mysql"
+	//"github.com/Unknwon/com"
 )
 
 /* const(
@@ -40,7 +40,7 @@ type Topic struct {
 
 func RegisterDB() {
 	// 注册model
-	orm.RegisterMode(new(Category), new(Topic))
+	orm.RegisterModel(new(Category), new(Topic))
 
 	// 注册驱动
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
