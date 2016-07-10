@@ -10,5 +10,5 @@ type MainController struct  {
 
 func (this *MainController) Get() {
 	// 定义首页模板
-	this.TplNames = "index.html"
+	this.TplName = "home.html"
 }

@@ -5,13 +5,21 @@ import (
 
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
-	//"github.com/Unknwon/com"
+	_ "github.com/Unknwon/com"
 )
 
 /* const(
 	_DB_Name = "data/beelog.db"
 	_MySql_DRIVER = "MySql"
 )*/
+
+var (
+	dbuser string = "root"
+	dbpasswd string = "linux"
+    dbname string = "mygoblog"
+	dbhost string = "192.168.31.176"
+	dbport string = "3306"
+)
 
 type Category struct {
 	Id	int64
@@ -43,8 +51,11 @@ func RegisterDB() {
 	orm.RegisterModel(new(Category), new(Topic))
 
 	// 注册驱动
-	orm.RegisterDriver("mysql", orm.DR_MySQL)
+	orm.RegisterDriver("mysql", orm.DRMySQL)
 
-	// 注册默认数据库  密码为空的格式
-	orm.RegisterDataBase("default", "mysql", "root:@/app?charset=utf8")
+	// 注册默认数据库,数据库名为mygoblog,密码为linux
+	//conn := dbuser + ":" + dbpasswd + "@/" + dbname + "?charset=utf8"
+	//orm.RegisterDataBase("default", "mysql", conn)
+	conn := dbuser + ":" + dbpasswd + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8&loc=Asia%2FShanghai"
+	orm.RegisterDataBase("default", "mysql", conn)
 }
