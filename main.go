@@ -1,83 +1,25 @@
 package main
 
 import (
-    "io"
-	"log"
-	"net/http"
-	"time"
+	//"models/models"
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
+	_"github.com/go-sql-driver/mysql"
 )
 
-/*
-func main(){
-	// 设置路由
-	http.HandleFunc("/", sayHello)
-
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+// 引入数据模型
+func init() {
+	// 注册数据库
+	models.RegisterDB()
 }
 
-func sayHello(w http.ResponseWriter, r *http.Request){
-	io.WriteString(w, "this is a Hello work")
-}
-*/
-/*
 func main() {
-	mux := http.NewServeMux()
+	// 开启 ORM 调式模式
+	orm.Debug = true
 
-	mux.Handle("/", &myHandler{})
-	mux.HandleFunc("/hello", sayHello)
+	// 自动建表
+	orm.RunSyncdb("default", false, true)
 
-	err := http.ListenAndServe(":8080", mux)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-type myHandler struct {}
-
-func (*myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request){
-	io.WriteString(w, "URL:" + r.URL.String())
-}
-
-func sayHello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "this is a Hello version2")
-}
-*/
-
-var mux map[string]func(http.ResponseWriter, *http.Request)
-
-func main(){
-	server := http.Server{
-		Addr: ":8080",
-		Handler: &myHandler{},
-		ReadTimeout: 5 * time.Second,
-	}
-
-	mux = make(map[string]func(http.ResponseWriter, *http.Request))
-	mux["/hello"] = sayHello
-	mux["/bye"] = sayBye
-
-	err := server.ListenAndServe()
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-type myHandler struct {}
-
-func (*myHandler) ServeHTTP(w http.ResponseWriter, r *http.Request){
-	if h, ok := mux[r.URL.String()]; ok {
-		h(w, r)
-		return
-	}
-}
-
-func sayHello(w http.ResponseWriter, r *http.Request){
-	io.WriteString(w, "this is a hello version 4")
-}
-
-func sayBye(w http.ResponseWriter, r *http.Request){
-	io.WriteString(w, "this is a bye version 4")
+	// 运行时
+	beego.Run()
 }
