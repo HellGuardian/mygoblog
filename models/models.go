@@ -17,7 +17,8 @@ var (
 	dbuser string = "root"
 	dbpasswd string = "linux"
     dbname string = "mygoblog"
-	dbhost string = "192.168.31.176"
+	//dbhost string = "192.168.31.176"
+	dbhost string = "192.168.191.3"
 	dbport string = "3306"
 )
 
@@ -54,8 +55,8 @@ func RegisterDB() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 
 	// 注册默认数据库,数据库名为mygoblog,密码为linux
-	//conn := dbuser + ":" + dbpasswd + "@/" + dbname + "?charset=utf8"
+	//conn := dbuser + ":" + dbpasswd + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8&loc=Asia%2FShanghai"
 	//orm.RegisterDataBase("default", "mysql", conn)
-	conn := dbuser + ":" + dbpasswd + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8&loc=Asia%2FShanghai"
-	orm.RegisterDataBase("default", "mysql", conn)
+	//conn := dbuser + ":" + dbpasswd + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8&loc=Asia%2FShanghai"
+	orm.RegisterDataBase("default", "mysql", "mygoblog:linux@tcp(192.168.191.2:3306)/mygoblog?charset=utf8")
 }
