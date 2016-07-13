@@ -59,4 +59,5 @@ func RegisterDB() {
 	//orm.RegisterDataBase("default", "mysql", conn)
 	//conn := dbuser + ":" + dbpasswd + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8&loc=Asia%2FShanghai"
 	orm.RegisterDataBase("default", "mysql", "mygoblog:linux@tcp(192.168.191.2:3306)/mygoblog?charset=utf8")
+	//orm.RegisterDataBase("default", "mysql", "mygoblog:linux@tcp(192.168.31.165:3306)/mygoblog?charset=utf8")
 }
