@@ -12,4 +12,6 @@ func (this *MainController) Get() {
 	// 定义首页模板
 	this.Data["IsHome}"] = true
 	this.TplName = "home.html"
+
+	this.Data["IsLogin"] = checkAccount(this.Ctx)
 }

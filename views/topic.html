@@ -2,12 +2,47 @@
 <title>文章 - 我的 beego 博客</title>
 
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-default">
         <div class="container">
             {{template "navbar" .}}
         </div>
     </div>
-    <div>
-        文章内容页
+    <div class="container">
+        <button type="button" class="btn btn-success">添加文章</button>
+        <a class="btn btn-default" onclick="return backToHome();">返回首页</a>
     </div>
+    <div style="margin: 10px 0"></div>
+
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr class="active">
+                    <th>ID</th>
+                    <th>文章标题</th>
+                    <th>创建时间</th>
+                    <th>浏览次数</th>
+                    <th>回复次数</th>
+                </tr>
+                </thead>
+                {{range .Topics}}
+                <tbody>
+                <tr>
+                    <td>{{.Id}}</td>
+                    <td>{{.Title}}</td>
+                    <td>{{.Created}}</td>
+                    <td>{{.Views}}</td>
+                    <td>{{.ReplyCount}}</td>
+                </tr>
+                </tbody>
+                {{end}}
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function backToHome(){
+            window.location.href = "/";
+            return false;
+        }
+    </script>
 </body>

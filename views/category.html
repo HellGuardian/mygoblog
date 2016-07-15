@@ -2,21 +2,70 @@
 <title>文章分类 - 我的 beego 博客</title>
 
 <body>
-<div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-default">
+        <div class="container">{{template "navbar" .}}</div>
+    </div>
+
     <div class="container">
-        {{template "navbar" .}}
+        <form method="Get" action="/category">
+            <div class="form-group">
+                <label>分类列表</label>
+                <input id="category" class="form-control" placeholder="Enter Category Information" name="categoryname">
+                <div style="margin: 10px 0;">
+                    <input name="op" type="hidden" value="add">
+                    <button type="submit" class="btn btn-default btn-success" onclick="return checkInput();">添加分类</button>
+                    <a class="btn btn-default" onclick="return backToHome();">返回首页</a>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
-<div class="container">
-    <div class="page-header">
-        <h1>我的XXXXXXX</h1>
-        <h6 class="text-muted">文章发表于 2016 年 x 月 x 日 xx:xx, 共有 100 次浏览, 20个评论</h6>
-        <p>
-            大家好,这是关于go的beego的一篇文章
-        </p>
+
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+            <thead>
+                    <tr class="active">
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>文章数</th>
+                        <th>浏览数量</th>
+                        <th>创建时间</th>
+                        <th>最后浏览</th>
+                        <th>操作</th>
+                    </tr>
+            </thead>
+                {{range .Categorys}}
+                <tbody>
+                    <tr>
+                    <th scope="row">{{.Id}}</th>
+                    <td>{{.Title}}</td>
+                    <td>{{.TopicCount}}</td>
+                    <td>{{.Views}}</td>
+                    <td>{{.Created}}</td>
+                    <td>{{.TopicLastUserId}}</td>
+                    <td><a href="/category?op=del&id={{.Id}}">删除</a></td>
+                    </tr>
+                </tbody>
+                {{end}}
+            </table>
+        </div>
     </div>
-</div>
-<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.1/jquery.min.js"></script>
-<script type="test/javascript" src="/static/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        function checkInput() {
+            var category = document.getElementById("category");
+            if (category.value.length == 0) {
+                alert("请输入分类名称")
+                return false;
+            }
+            return true;
+        }
+        function backToHome() {
+            window.location.href = "/";
+            return false;
+        }
+    </script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.1/jquery.min.js"></script>
+    <script type="test/javascript" src="/static/js/bootstrap.min.js"></script>
 </body>
 </html>
