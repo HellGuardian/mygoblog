@@ -1,4 +1,4 @@
-package main
+/*package main
 
 import (
     "io"
@@ -45,7 +45,7 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "this is a Hello version2")
 }
 */
-
+/*
 var mux map[string]func(http.ResponseWriter, *http.Request)
 
 func main(){
@@ -81,3 +81,4 @@ func sayHello(w http.ResponseWriter, r *http.Request){
 func sayBye(w http.ResponseWriter, r *http.Request){
 	io.WriteString(w, "this is a bye version 4")
 }
+*/
