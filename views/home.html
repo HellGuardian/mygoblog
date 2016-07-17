@@ -9,39 +9,15 @@
     </div>
 
     <div class="container">
+        {{range .Topics}}
         <div class="page-header">
-            <h2>Linux检测网卡流量命令</h2>
-            <h6 class="text-muted">文章发表于 2016 年 x 月 x 日 xx:xx, 共有 100 次浏览, 20个评论</h6>
+            <h2><a>{{.Title}}</a></h2>
+            <h6 class="text-muted">文章发表于 {{.Created}}, 共有 {{.Views}} 次浏览, {{.ReplyCount}} 个评论</h6>
             <p>
-                我使用了其中一些，还找了网上其他一些资料，总结如下：
-                1. 使用 iptraf
-                iptraf是一个实时查看网络流量的文本屏幕界面工具。
-
-                有些系统不一定安装了，
-                如果是 RHEL，那么就去找安装盘中的 iptraf*.rpm 包安装；
-                如果是 CentOS，那么用 yum install -y iptraf 进行安装
-
-                iptraf是一个文本全屏幕界面，操作起来比较简单明了。最好使用 putty 来看，SecureCRT可能显示乱码。
-
-                它提供了很多统计方式：
-                （1）IP traffic monitor
-                （2）General interface statistics
-                （3）Detailed interface statistics
-
-                如果跟上 -B 参数，还可以后台执行，把数据保存到文件中，位于 /var/log/iptraf 目录。
-
-                2. nload
-                不是系统自带程序。
-
-                3. ifstat
-                不是系统自带程序。
-
-                4. sar
-                如果系统没有安装，
-                如果是 RHEL，那么就去安装盘中找 sysstat*.rpm 包安装；
-                如果是 CentOS，那么用 yum install -y sysstat 安装。
+               {{.Content}}
             </p>
         </div>
+        {{end}}
     </div>
     <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.1/jquery.min.js"></script>
     <script type="test/javascript" src="/static/js/bootstrap.min.js"></script>

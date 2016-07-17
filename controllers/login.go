@@ -12,9 +12,11 @@ type LoginController struct  {
 func (this *LoginController) Get(){
 	isExit := this.Input().Get("exit") == "true"
 	if isExit {
-		this.Ctx.SetCookie("username", "", -1, "/")
-		this.Ctx.SetCookie("pwd", "", -1, "/")
-		this.Redirect("/", 301)
+		this.DelSession("username")
+		this.DelSession("pwd")
+		//this.Ctx.SetCookie("username", "", -1, "/")
+		//this.Ctx.SetCookie("pwd", "", -1, "/")
+		this.Redirect("/login", 301)
 		return
 	}
 	this.TplName = "login.html"

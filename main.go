@@ -22,10 +22,11 @@ func main() {
 	// 自动建表
 	orm.RunSyncdb("default", false, true)
 
-	// 运行时
+	// 注册路由
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/login", &controllers.LoginController{})
 	beego.Router("/category", &controllers.CategoryController{})
 	beego.Router("/topic", &controllers.TopicController{})
+	beego.AutoRouter(&controllers.TopicController{})
 	beego.Run()
 }

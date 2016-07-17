@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="container">
-        <button type="button" class="btn btn-success">添加文章</button>
+        <a type="button" class="btn btn-success" href="/topic/add">添加文章</a>
         <a class="btn btn-default" onclick="return backToHome();">返回首页</a>
     </div>
     <div style="margin: 10px 0"></div>
@@ -21,8 +21,10 @@
                     <th>ID</th>
                     <th>文章标题</th>
                     <th>创建时间</th>
+                    <th>最后修改时间</th>
                     <th>浏览次数</th>
                     <th>回复次数</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 {{range .Topics}}
@@ -31,8 +33,10 @@
                     <td>{{.Id}}</td>
                     <td>{{.Title}}</td>
                     <td>{{.Created}}</td>
+                    <td>{{.Updated}}</td>
                     <td>{{.Views}}</td>
                     <td>{{.ReplyCount}}</td>
+                    <td><a href="/topic/delete?tid={{.Id}}">删除</a> | <a href="/topic/modify?tid={{.Id}}">编辑</a></td>
                 </tr>
                 </tbody>
                 {{end}}
