@@ -14,29 +14,32 @@
     <div style="margin: 10px 0"></div>
 
     <div class="container">
+        {{$isLogin := .IsLogin}}
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                 <tr class="active">
                     <th>ID</th>
                     <th>文章标题</th>
+                    <th>所属分类</th>
                     <th>创建时间</th>
                     <th>最后修改时间</th>
                     <th>浏览次数</th>
                     <th>回复次数</th>
-                    <th>操作</th>
+                    {{if $isLogin}}<th>操作</th>{{end}}
                 </tr>
                 </thead>
                 {{range .Topics}}
                 <tbody>
                 <tr>
                     <td>{{.Id}}</td>
-                    <td>{{.Title}}</td>
-                    <td>{{.Created}}</td>
-                    <td>{{.Updated}}</td>
+                    <td><a href="/topic/view/{{.Id}}">{{.Title}}</a></td>
+                    <td>{{.Category}}</td>
+                    <td>{{date .Created "Y-m-d H:i:s"}}</td>
+                    <td>{{date .Updated "Y-m-d H:i:s"}}</td>
                     <td>{{.Views}}</td>
                     <td>{{.ReplyCount}}</td>
-                    <td><a href="/topic/delete?tid={{.Id}}">删除</a> | <a href="/topic/modify?tid={{.Id}}">编辑</a></td>
+                    {{if $isLogin}}<td><a href="/topic/delete?tid={{.Id}}">删除</a> | <a href="/topic/modify?tid={{.Id}}">编辑</a></td>{{end}}
                 </tr>
                 </tbody>
                 {{end}}

@@ -17,7 +17,7 @@ func (this *TopicController) Get() {
 
 	// 获取所有的文章
 	var err error
-	this.Data["Topics"], err = models.GetAllTopics(false)
+	this.Data["Topics"], err = models.GetAllTopics("", false)
 	if err != nil {
 		beego.Error(err)
 	}
@@ -36,12 +36,7 @@ func (this *TopicController) Post() {
 	title := this.Input().Get("title")
 	category := this.Input().Get("category")
 	content := this.Input().Get("content")
-
-	//var err error
-	//this.Data["Categorys"], err = models.GetAllCategory()
-	//if err != nil {
-	//	beego.Error(err)
-	//}
+	//category1 := this.Options()
 
 	var err error
 	if len(tid) == 0 {
@@ -71,6 +66,15 @@ func (this *TopicController) View() {
 
 	this.Data["Topic"] = topic
 	this.Data["Tid"] = this.Ctx.Input.Param("0")
+
+	replies, err := models.GetAllReplies(this.Ctx.Input.Param("0"))
+	if err != nil {
+		beego.Error(err)
+		return
+	}
+
+	this.Data["Replies"] = replies
+	this.Data["IsLogin"] = checkAccount(this.Ctx)
 }
 
 // 修改文章的方法
@@ -84,7 +88,12 @@ func (this *TopicController) Modify() {
 		this.Redirect("/", 302)
 		return
 	}
+	cate, err := models.GetAllCategory()
+	if err != nil {
+		beego.Error(err)
+	}
 
+	this.Data["AllCategories"] = cate
 	this.Data["Topic"] = topic
 	this.Data["Tid"] = tid
 }

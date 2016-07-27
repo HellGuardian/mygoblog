@@ -18,16 +18,35 @@
             </div>
              <div class="form-group">
                  <lable>文章分类:</lable>
-                 <input class="form-control" type="text" name="category" value="{{.Topic.Category}}">
+                 <div>
+                     <select class="form-control" id="category" name="category">
+                         <option>{{.Topic.Category}}</option>
+                         {{range .AllCategories}}
+                         <option  select="selected">{{.Title}}</option>
+                         {{end}}
+                     </select>
+                 </div>
+                 <!-- <input class="form-control" type="text" name="category" value="{{.Topic.Category}}"> -->
              </div>
 
             <div class="form-group">
                 <label>文章内容:</label>
                 <textarea name="content" cols="30" rows="10" class="form-control">{{.Topic.Content}}</textarea>
             </div>
-            <button type="submit" class="btn btn-success">修改提交</button>
+            <button type="submit" class="btn btn-success" onclick="return check();">修改提交</button>
         </form>
     </div>
-    <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.1/jquery.min.js"></script>
-    <script type="test/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function check() {
+            //select的value值为-1
+            if ('-1' == $('#category').val()) {
+    	        alert("请选择文章类型");
+    	        $('#category').focus();
+    	        return false;
+            }
+            return true;
+        }
+    </script>
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>

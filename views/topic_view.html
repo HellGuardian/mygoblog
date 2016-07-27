@@ -9,8 +9,53 @@
     </div>
 
     <div class="container">
-        <h1>{{.Topic.Title}}</h1>
-        <a href="/topic/modify?tid={{.Tid}}" class="btn btn-default">修改文章</a>
+        <div>
+            <h1>{{.Topic.Title}}</h1>
+            <a href="/topic/modify?tid={{.Tid}}">编辑</a>
+        </div>
         {{.Topic.Content}}
     </div>
+
+    <div class="container">
+        <hr>
+        {{$tid := .Topic.Id}}
+        {{$isLogin := .IsLogin}}
+        {{range .Replies}}
+        <h4>{{.Name}}  <small>{{date .Created "Y-m-d H:i:s"}} {{if $isLogin}} | <a href="/reply/delete?tid={{$tid}}&rid={{.Id}}">删除</a>{{end}}</small></h4>
+        {{.Content}}
+        <hr style="border:0; border-top:1px dashed #222;">
+        {{end}}
+        <h4 class="sub-header">发布评论</h4>
+        <form method="post" action="/reply/add">
+            <input type="hidden" name="tid" value="{{.Topic.Id}}">
+            <div class="form-group">
+                <label>昵 称:</label>
+                <input type="text" id="nickname" class="form-control" name="nickname" placeholder="输入用户昵称(*)">
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" class="form-control" name="email" placeholder="tan_xw@hotmail.com(可不填)">
+            </div>
+            <div class="form-group">
+                <label>评论内容:</label>
+                <textarea class="form-control" id="content" name="content" placeholder="输入评论内容(*)" rows="7"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default btn-success" onclick="return checkInput();">发表评论</button>
+        </form>
+    </div>
+    <script>
+        function checkInput(){
+            var nickname = document.getElementById("nickname");
+            if (nickname.value.length == 0) {
+                alert("请输入用户昵称!")
+                return false;
+            }
+
+            var content = document.getElementById("content");
+            if (content.value.length == 0) {
+                alert("请输入评论内容!")
+                return false;
+            }
+        }
+    </script>
 </body>

@@ -21,17 +21,16 @@
     </div>
 
     <div class="container">
-        <div class="table-responsive">
+        {{$isLogin := .IsLogin}}
+        <div class="bs-example" data-example-id="bordered-table">
             <table class="table table-bordered table-hover">
             <thead>
                     <tr class="active">
                         <th>ID</th>
-                        <th>名称</th>
-                        <th>文章数</th>
-                        <th>浏览数量</th>
+                        <th>分类名称</th>
                         <th>创建时间</th>
-                        <th>最后浏览</th>
-                        <th>操作</th>
+                        <th>文章数</th>
+                        {{if $isLogin}}<th>操作</th>{{end}}
                     </tr>
             </thead>
                 {{range .Categorys}}
@@ -39,11 +38,9 @@
                     <tr>
                     <th scope="row">{{.Id}}</th>
                     <td>{{.Title}}</td>
+                    <td>{{date .Created "Y-m-d H:i:s"}}</td>
                     <td>{{.TopicCount}}</td>
-                    <td>{{.Views}}</td>
-                    <td>{{.Created}}</td>
-                    <td>{{.TopicLastUserId}}</td>
-                    <td><a href="/category?op=del&id={{.Id}}">删除</a> | <a href="/category?id={{.Id}}">编辑</a></td>
+                    {{if $isLogin}}<td><a href="/category?op=del&id={{.Id}}">删除</a> | <a href="/category?id={{.Id}}">编辑</a></td>{{end}}
                     </tr>
                 </tbody>
                 {{end}}

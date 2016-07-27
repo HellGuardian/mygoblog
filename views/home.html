@@ -9,16 +9,28 @@
     </div>
 
     <div class="container">
+        <div class="col-md-9">
         {{range .Topics}}
         <div class="page-header">
-            <h2><a>{{.Title}}</a></h2>
-            <h6 class="text-muted">文章发表于 {{.Created}}, 共有 {{.Views}} 次浏览, {{.ReplyCount}} 个评论</h6>
+            <h2><a href="/topic/view/{{.Id}}">{{.Title}}</a></h2>
+            <h6 class="text-muted">文章发表于 {{date .Created "Y-m-d H:i:s"}}, 共有 {{.Views}} 次浏览, {{.ReplyCount}} 个评论</h6>
             <p>
                {{.Content}}
             </p>
         </div>
         {{end}}
+        </div>
+
+        <div class="col-md-3">
+            <h4>文章分类</h4>
+            <ul>
+                {{range .Categories}}
+                <li><a href="/?cate={{.Title}}">{{.Title}}</a></li>
+                {{end}}
+            </ul>
+        </div>
     </div>
+
     <script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.2.1/jquery.min.js"></script>
     <script type="test/javascript" src="/static/js/bootstrap.min.js"></script>
 </body>
