@@ -1,0 +1,48 @@
+{{template "header"}}
+<title>用户列表 - 我的 beego 博客</title>
+
+<body>
+<div class="page secondary">
+    <div class="navbar navbar-default">
+        <div class="container">{{template "navbar" .}}</div>
+    </div>
+
+    <div class="container">
+        <input type="hidden" name="op" value="del">
+        {{$isLogin := .IsLogin}}
+        <div class="bs-example" data-example-id="bordered-table">
+            <table class="table table-bordered table-hover">
+            <thead>
+                    <tr class="active">
+                        <th>ID</th>
+                        <th>用户名称</th>
+                        <th>密码</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>生日</th>
+                        <th>Email</th>
+                        <th>注册时间</th>
+                        {{if $isLogin}}<th>操作</th>{{end}}
+                    </tr>
+            </thead>
+                <tbody>
+                {{range .User}}
+                    <tr>
+                    <th scope="row">{{.Id}}</th>
+                    <td>{{.UserName}}</td>
+                    <td>{{.PassWord}}</td>
+                    <td>{{.Sex}}</td>
+                    <td>{{.Age}}</td>
+                    <td>{{date .Birthday "Y-m-d"}}</td>
+                    <td>{{.Email}}</td>
+                    <td>{{date .RegisterTime "Y-m-d H:i:s"}}</td>
+                    {{if $isLogin}}<td><a type="button" class="btn btn-primary btn-xs" href="/user/edit?uid={{.Id}}">编 辑</a> <a type="button" class="btn btn-danger btn-xs" href="/user/delete?uid={{.Id}}">删 除</a> </td>{{end}}
+                    </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

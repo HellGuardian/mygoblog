@@ -31,5 +31,11 @@ func main() {
 	beego.Router("/reply", &controllers.ReplyController{})
 	beego.Router("/reply/add", &controllers.ReplyController{}, "post:Add")
 	beego.Router("/reply/delete", &controllers.ReplyController{}, "get:Delete")
+	beego.Router("/register", &controllers.UserController{}, "*:Add")
+	beego.Router("/user/view", &controllers.UserController{}, "*:View")
+	beego.Router("/user/delete",&controllers.UserController{}, "get:Delete")
+	beego.Router("/user/edit", &controllers.UserController{}, "get:Edit")
+	beego.Router("/user/edit", &controllers.UserController{}, "post:Add")
+	beego.AutoRouter(&controllers.UserController{})
 	beego.Run()
 }

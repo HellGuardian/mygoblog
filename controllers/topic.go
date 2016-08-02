@@ -96,6 +96,7 @@ func (this *TopicController) Modify() {
 	this.Data["AllCategories"] = cate
 	this.Data["Topic"] = topic
 	this.Data["Tid"] = tid
+	this.Data["IsLogin"] = checkAccount(this.Ctx)
 }
 
 // 删除文章,通过管理员删除文章方法

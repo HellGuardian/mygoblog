@@ -10,11 +10,8 @@ type LoginController struct  {
 }
 
 func (this *LoginController) Get() {
-	//sess, _ := beego.GlobalSessions.SessionStart()
 	isExit := this.Input().Get("exit") == "true"
 	if isExit {
-		//this.DelSession("username")
-		//this.DelSession("pwd")
 		this.Ctx.SetCookie("username", "", -1, "/")
 		this.Ctx.SetCookie("pwd", "", -1, "/")
 		this.Redirect("/login.html", 301)

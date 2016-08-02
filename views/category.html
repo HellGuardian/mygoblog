@@ -2,6 +2,7 @@
 <title>文章分类 - 我的 beego 博客</title>
 
 <body>
+<div class="page secondary">
     <div class="navbar navbar-default">
         <div class="container">{{template "navbar" .}}</div>
     </div>
@@ -33,21 +34,21 @@
                         {{if $isLogin}}<th>操作</th>{{end}}
                     </tr>
             </thead>
-                {{range .Categorys}}
                 <tbody>
+                {{range .Categorys}}
                     <tr>
                     <th scope="row">{{.Id}}</th>
                     <td>{{.Title}}</td>
                     <td>{{date .Created "Y-m-d H:i:s"}}</td>
                     <td>{{.TopicCount}}</td>
-                    {{if $isLogin}}<td><a href="/category?op=del&id={{.Id}}">删除</a> | <a href="/category?id={{.Id}}">编辑</a></td>{{end}}
+                    {{if $isLogin}}<td><a type="button" class="btn btn-primary btn-xs" href="/category?id={{.Id}}">编 辑</a> <a type="button" class="btn btn-danger btn-xs"  href="/category?op=del&id={{.Id}}">删 除</a> </td>{{end}}
                     </tr>
-                </tbody>
                 {{end}}
+                </tbody>
             </table>
         </div>
     </div>
-
+</div>
     <script type="text/javascript">
         function checkInput() {
             var category = document.getElementById("category");

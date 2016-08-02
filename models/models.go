@@ -62,10 +62,11 @@ type User struct {
 	Id int64
 	UserName string `org:"unique;size(20)"`
 	PassWord string `org:"size(32)"`
+	Sex string
+	Age int64
+	Birthday time.Time
 	Email string `org:"size(50)"`
-	LastLogin time.Time `org:"auto_now_add;type(datetime)"`
-	LoginCount int
-	LoginIp string `org:"size(32)"`
+	RegisterTime time.Time `org:"auto_now_add;type(datetime)"`
 	Active int8
 }
 

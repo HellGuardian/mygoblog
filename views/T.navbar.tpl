@@ -5,6 +5,7 @@
     <li {{if .IsHome}}class="active"{{end}}><a href="/">首页</a></li>
     <li {{if .IsCategory}}class="active"{{end}}><a href="/category">分类</a></li>
     <li {{if .IsTopic}}class="active"{{end}}><a href="/topic">文章</a></li>
+    <li {{if .IsUser}}class="active"{{end}}><a href="/user/view">用户列表</a></li>
 </ul>
 </div>
 
@@ -15,6 +16,7 @@
         {{else}}
         <li><a href="/login">管理员登录</a></li>
         {{end}}
+        <li><a href="/register">注册</a></li>
     </ul>
 </div>
 {{end}}
